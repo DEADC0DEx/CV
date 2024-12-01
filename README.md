@@ -1,80 +1,88 @@
+
 # Aviad Rossmann
-**Senior Software Engineer**  
-**Location:** Tel Aviv District, Israel  
-**Contact:** +972 524624891 | aviad.rossmann@gmail.com  
-**LinkedIn:** [linkedin.com/in/aviadrossmann](https://www.linkedin.com/in/aviadrossmann)  
-**GitHub:** [github.com/DEADC0DEx/CV](https://github.com/DEADC0DEx/CV)
+*Code Poet - Crafting Elegant and Efficient Solutions in Software Engineering*  
+**Tel Aviv District, Israel**  
+**Phone**: +972524624891  
+**Email**: aviad.rossmann@gmail.com  
+**[LinkedIn](https://linkedin.com/in/aviadrossmann)** | **[GitHub](https://github.com/DEADC0DEx/CV)**  
 
 ---
 
 ## Summary
-A dedicated and innovative Senior Software Engineer with over a decade of experience in software development, optimization, and infrastructure. Specializing in cross-platform integration, algorithm optimization, and embedded systems, I have a proven track record of delivering efficient and scalable solutions. My passion for crafting elegant and efficient code is combined with a deep knowledge of C, C++, Python, and various advanced technologies. I thrive in challenging environments that allow me to leverage my technical expertise and creativity to drive impactful results.
+Dynamic software engineer with over a decade of experience in crafting high-performance solutions in C, C++, Python, and embedded systems.  
+Expert in algorithm optimization, software infrastructure, and cross-platform integration. Proven ability to lead projects from concept to deployment, with a strong focus on scalability, efficiency, and cutting-edge technology like CUDA, TensorRT, and GPU programming.
 
 ---
 
-## Professional Experience
+## Core Competencies
+- **Programming**: C, C++, Python, CUDA, OpenCL  
+- **Software Design**: Infrastructure development, optimization, cross-platform integration  
+- **Performance Profiling**: NVIDIA Nsight
+- **Machine Learning Frameworks**: TensorRT, CUDA  
+- **Tools**: Docker, Linux, OpenCV  
 
-### LeddarTech – Israel  
-**Senior Software Engineer**  
-*October 2021 – Present*  
-- Develop and optimize advanced driver-assistance systems (ADAS) using C++.  
-- Improved performance of system software through algorithm optimization, resulting in increased efficiency and reliability.  
-- Contributed to the design and implementation of new features, leveraging knowledge of software design principles.  
-- Utilized Linux, OpenCV, CUDA, and TensorRT to enhance system capabilities, leading to the creation of more robust solutions.
+---
 
-### Zixi - Software-Defined Video Platform – Tel Aviv, Israel  
-**SDK Lead**  
-*January 2021 – September 2021*  
-- Led the release of the Zixi SDK and managed platform integrations across various systems.  
-- Designed Docker build systems, ensuring compatibility across multiple Linux versions.  
-- Optimized software performance and resolved critical bugs, enhancing the SDK’s functionality.  
-- Collaborated with cross-functional teams to ensure successful deployment and support for partners.
+## Experience
 
-### Palo Alto Networks – Tel Aviv, Israel  
-**Senior Staff Software Engineer**  
-*June 2019 – March 2020*  
-- Developed cross-platform features for an enterprise-grade endpoint security product.  
-- Optimized CPU and memory performance using C++14 and Boost, improving control flows.  
-- Created infrastructure scripts in Python to automate processes and improve operational efficiency.
+### **LeddarTech**  
+*Senior Software Engineer*  
+*October 2021 - Present | Israel*  
+- Optimized machine learning inference workflows using CUDA and TensorRT, achieving significant performance gains for ADAS systems.  
+- Designed and implemented advanced features to enhance system reliability and scalability.  
+- Leveraged expertise in Linux, OpenCV, and embedded systems to deliver cutting-edge solutions for ADAS applications.  
+- Utilized profiling tools to identify bottlenecks and optimize GPU workloads.  
 
-### Samsung Israel R&D Center (SIRC) – Israel  
-**Software Engineer**  
-*August 2015 – May 2019*  
-- Designed real-time multi-threaded embedded software and optimized algorithms on ARM platforms using NEON and OpenCL.  
-- Implemented hardware abstraction for image processing systems and integrated Android camera HAL.  
-- Developed Python scripts for automatic code generation, improving productivity and accuracy.
+### **Zixi**  
+*SDK Lead*  
+*January 2021 - September 2021 | Tel Aviv, Israel*  
+- Managed the release of Zixi SDK and led partner integrations across various platforms.  
+- Designed and implemented Docker build systems ensuring seamless compatibility across Linux versions.  
+- Optimized core functionalities using C++, enhancing software performance and reducing deployment overhead.  
 
-### Israel Defense Forces – Israel  
-**Software Engineer & System Engineer**  
-*August 2013 – August 2015*  
-- Led development projects from initial concept to battlefield deployment, focusing on weapon systems and intelligence gathering tools.  
-- Managed rapid development cycles and trained combat forces in the deployment of operational systems.  
-- Audited software using C, C++, Arduino, Android, and C#.
+### **Palo Alto Networks**  
+*Senior Staff Software Engineer*  
+*June 2019 - March 2020 | Tel Aviv Area, Israel*  
+- Developed cross-platform infrastructure features for enterprise-grade endpoint security.  
+- Designed scalable solutions with C++14 and Boost, achieving substantial improvements in CPU and memory performance.  
+- Automated infrastructure processes with Python, streamlining deployment workflows.  
 
-### Elisra – Israel  
-**Software Engineer**  
-*May 2011 – August 2013*  
-- Developed firmware in C, C++, and C# for critical systems, including QNX OS integration.  
-- Conducted full system testing and optimization for improved functionality.
+### **Samsung Israel R&D Center - SIRC**  
+*Software Engineer*  
+*August 2015 - May 2019 | Israel*  
+- Developed performance-critical GPU kernels using OpenCL, enhancing computation efficiency for ARM platforms.  
+- Designed real-time, multi-threaded embedded software systems for image processing hardware.  
+- Implemented hardware abstraction layers and integrated Android Camera HAL.  
+
+### **Israel Defense Forces**  
+*Software Engineer*  
+*August 2013 - August 2015*  
+- Designed and deployed mission-critical systems, optimizing intelligence and weapons platforms.  
+- Led rapid development cycles, transitioning projects from concept to field deployment.  
+- Trained field teams on deploying operational systems effectively.  
+
+### **Elisra**  
+*Software Engineer*  
+*May 2011 - August 2013*  
+- Developed firmware in C and C++, integrating QNX OS for embedded systems.  
+- Conducted full-system tests, ensuring reliability and efficiency in critical operations.  
 
 ---
 
 ## Education
-
 **Bar-Ilan University**  
-**Bachelor of Science in Electrical Engineering**  
-*2005 – 2009*
+*B.Sc. in Electrical Engineering*  
+2005 - 2009  
 
 ---
 
-## Skills  
-- **Programming Languages:** C, C++, Python  
-- **Technologies:** Linux, CUDA, OpenCV, TensorRT, Docker  
-- **Software Infrastructure:** Algorithm Optimization, Cross-Platform Integration, Embedded Systems  
-- **Languages:** Hebrew (Native), English (Full Professional)
+## Projects
+- **Performance Optimization**: Designed and implemented CUDA-based workflows for deep learning inference pipelines, achieving significant speedups.  
+- **Cross-Platform SDK Development**: Spearheaded SDK release processes, maintaining compatibility across diverse systems.  
+- **GPU Profiling Portfolio**: Built and maintained GPU workload optimization solutions using NVIDIA Nsight and CUPTI.  
 
 ---
 
-## Projects  
-- **GitHub:** [github.com/DEADC0DEx/CV](https://github.com/DEADC0DEx/CV)  
-Explore personal and professional projects related to algorithm development, infrastructure optimization, and cross-platform solutions.
+## Languages
+- **Hebrew**: Native or Bilingual Proficiency  
+- **English**: Full Professional Proficiency
