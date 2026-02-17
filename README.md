@@ -1,88 +1,126 @@
-
-# Aviad Rossmann
-*Code Poet - Crafting Elegant and Efficient Solutions in Software Engineering*  
-**Tel Aviv District, Israel**  
-**Phone**: +972524624891  
-**Email**: aviad.rossmann@gmail.com  
-**[LinkedIn](https://linkedin.com/in/aviadrossmann)** | **[GitHub](https://github.com/DEADC0DEx/CV)**  
-
----
-
-## Summary
-Dynamic software engineer with over a decade of experience in crafting high-performance solutions in C, C++, Python, and embedded systems.  
-Expert in algorithm optimization, software infrastructure, and cross-platform integration. Proven ability to lead projects from concept to deployment, with a strong focus on scalability, efficiency, and cutting-edge technology like CUDA, TensorRT, and GPU programming.
+# AVIAD ROSSMANN
+**Tel Aviv, Israel**  
++972-52-462-4891  
+aviad.rossmann@gmail.com  
+[linkedin.com/in/aviadrossmann](https://linkedin.com/in/aviadrossmann)  
+[github.com/DEADCODEX](https://github.com/DEADCODEX)
 
 ---
 
-## Core Competencies
-- **Programming**: C, C++, Python, CUDA, OpenCL  
-- **Software Design**: Infrastructure development, optimization, cross-platform integration  
-- **Performance Profiling**: NVIDIA Nsight
-- **Machine Learning Frameworks**: TensorRT, CUDA  
-- **Tools**: Docker, Linux, OpenCV  
+## SENIOR STAFF SOFTWARE ENGINEER  
+**LLM Infrastructure | High-Performance Computing | System Architecture**
 
 ---
 
-## Experience
+## Executive Summary
 
-### **LeddarTech**  
-*Senior Software Engineer*  
-*October 2021 - Present | Israel*  
-- Optimized machine learning inference workflows using CUDA and TensorRT, achieving significant performance gains for ADAS systems.  
-- Designed and implemented advanced features to enhance system reliability and scalability.  
-- Leveraged expertise in Linux, OpenCV, and embedded systems to deliver cutting-edge solutions for ADAS applications.  
-- Utilized profiling tools to identify bottlenecks and optimize GPU workloads.  
+Senior Systems Engineer with 10+ years of experience in low-level optimization and hardware-aware software design. Recently pivoted deep systems expertise into Generative AI Infrastructure, architecting multi-node LLM inference systems that outperform legacy x86 deployments.
 
-### **Zixi**  
-*SDK Lead*  
-*January 2021 - September 2021 | Tel Aviv, Israel*  
-- Managed the release of Zixi SDK and led partner integrations across various platforms.  
-- Designed and implemented Docker build systems ensuring seamless compatibility across Linux versions.  
-- Optimized core functionalities using C++, enhancing software performance and reducing deployment overhead.  
-
-### **Palo Alto Networks**  
-*Senior Staff Software Engineer*  
-*June 2019 - March 2020 | Tel Aviv Area, Israel*  
-- Developed cross-platform infrastructure features for enterprise-grade endpoint security.  
-- Designed scalable solutions with C++14 and Boost, achieving substantial improvements in CPU and memory performance.  
-- Automated infrastructure processes with Python, streamlining deployment workflows.  
-
-### **Samsung Israel R&D Center - SIRC**  
-*Software Engineer*  
-*August 2015 - May 2019 | Israel*  
-- Developed performance-critical GPU kernels using OpenCL, enhancing computation efficiency for ARM platforms.  
-- Designed real-time, multi-threaded embedded software systems for image processing hardware.  
-- Implemented hardware abstraction layers and integrated Android Camera HAL.  
-
-### **Israel Defense Forces**  
-*Software Engineer*  
-*August 2013 - August 2015*  
-- Designed and deployed mission-critical systems, optimizing intelligence and weapons platforms.  
-- Led rapid development cycles, transitioning projects from concept to field deployment.  
-- Trained field teams on deploying operational systems effectively.  
-
-### **Elisra**  
-*Software Engineer*  
-*May 2011 - August 2013*  
-- Developed firmware in C and C++, integrating QNX OS for embedded systems.  
-- Conducted full-system tests, ensuring reliability and efficiency in critical operations.  
+Specializes in translating embedded-system constraints (latency, memory, throughput, determinism) into measurable efficiency gains in large-scale cloud AI serving environments.
 
 ---
 
-## Education
-**Bar-Ilan University**  
-*B.Sc. in Electrical Engineering*  
-2005 - 2009  
+## Technical Expertise
+
+### AI Infrastructure (Current Focus)
+- LLM Serving (vLLM, OpenAI-compatible APIs)
+- Distributed Inference Architectures
+- Qualcomm AI100
+- ARM Neoverse
+- Multi-node serving systems
+
+### Systems Foundation (10+ Years)
+- C / C++ (Modern C++14/17)
+- Linux Kernel & User-Space Systems
+- Memory Management & Allocation Strategies
+- Real-Time Systems
+- CUDA & GPU Pipelines
+
+### Performance Engineering
+- perf, py-spy
+- Cache coherency & NUMA optimization
+- DMA pipelines
+- Lock-free concurrency
+- CPU/GPU profiling & bottleneck analysis
 
 ---
 
-## Projects
-- **Performance Optimization**: Designed and implemented CUDA-based workflows for deep learning inference pipelines, achieving significant speedups.  
-- **Cross-Platform SDK Development**: Spearheaded SDK release processes, maintaining compatibility across diverse systems.  
-- **GPU Profiling Portfolio**: Built and maintained GPU workload optimization solutions using NVIDIA Nsight and CUPTI.  
+# Professional Experience
+
+## NEUREALITY — Tel Aviv, Israel  
+**Senior Software Engineer (LLM Infrastructure Lead)**  
+*Feb 2025 – Present*
+
+**Focus:** High-Performance Server-Side LLM Inference & Cloud Architecture
+
+- Lead architect for high-performance LLM inference on ARM Neoverse servers accelerated by Qualcomm AI100.
+- Engineered a serving stack where an 8-core ARM Neoverse N1 server outperformed a 128-core Intel x86 server under concurrent OpenAI-compatible workloads.
+- Designed and implemented zero-copy DMA buffer integration into a custom vLLM fork, eliminating host-device transfer overhead.
+- Conducted deep system profiling (CPU utilization, cache thrashing, wait states), unlocking 17% throughput gain per server instance.
+- Redesigned tokenizer and preprocessing pipelines to remove critical serving-path bottlenecks.
 
 ---
 
-## Languages
-- **Hebrew**: Native or Bilingual Proficiency  
-- **English**: Full Professional Proficiency
+## LEDDARTECH — Tel Aviv, Israel  
+**Senior Software Engineer**  
+*Oct 2021 – Feb 2025*
+
+**Focus:** Embedded ML Inference & Real-Time ADAS Systems
+
+- Developed C++ and Python frameworks for real-time ML inference in automotive (ADAS) environments.
+- Designed scalable, high-availability features for production embedded systems.
+- Performed GPU workload optimization and system-level profiling in resource-constrained environments.
+- Delivered production-grade Linux and OpenCV-based infrastructure components.
+
+---
+
+## ZIXI — Tel Aviv, Israel  
+**SDK Team Lead**  
+*Jan 2021 – Sep 2021*
+
+**Focus:** Video Streaming Infrastructure & SDK Design
+
+- Led SDK release cycle and partner integrations.
+- Designed Docker-based cross-distribution Linux build systems.
+- Optimized core C++ components to reduce runtime and deployment overhead.
+
+---
+
+## PALO ALTO NETWORKS — Tel Aviv, Israel  
+**Senior Staff Software Engineer**  
+*Jun 2019 – Mar 2020*
+
+**Focus:** Endpoint Security & Cross-Platform Systems
+
+- Designed scalable cross-platform security infrastructure using C++14 and Boost.
+- Achieved significant reductions in CPU and memory usage for endpoint agents.
+- Streamlined deployment and testing workflows via Python automation tooling.
+
+---
+
+## SAMSUNG ISRAEL R&D CENTER (SIRC) — Tel Aviv, Israel  
+**Software Engineer**  
+*Aug 2015 – May 2019*
+
+**Focus:** Embedded Android & Hardware Acceleration
+
+- Designed multi-threaded C++ systems for embedded platforms.
+- Optimized ARM-based algorithms using NEON and OpenCL.
+- Implemented Hardware Abstraction Layers (HAL) for image processing accelerators.
+
+---
+
+# Education & Military Service
+
+## ISRAEL DEFENSE FORCES (IDF)  
+**System Engineer & Team Lead**  
+*2009 – 2015*
+
+- Led rapid development of C/C++ operational systems from concept to battlefield deployment.
+- Managed small engineering teams under high-pressure, mission-critical constraints.
+
+---
+
+## BAR-ILAN UNIVERSITY  
+**B.Sc., Electrical Engineering**  
+*2005 – 2009*
