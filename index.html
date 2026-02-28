@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aviad Rossmann — Senior Staff Engineer (Probably Overqualified For Your Role)</title>
+  <style>
+    :root {
+      --green: #00ff41;
+      --dim-green: #00aa2a;
+      --dark-green: #003d10;
+      --bg: #0a0a0a;
+      --surface: #0f1f0f;
+      --surface2: #162616;
+      --red: #ff3b3b;
+      --yellow: #ffe600;
+      --blue: #00cfff;
+      --text: #c8ffc8;
+      --muted: #5a8a5a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── SCANLINES OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.12) 2px,
+        rgba(0,0,0,0.12) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── MATRIX RAIN CANVAS ── */
+    #matrix-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    /* ── BOOT SCREEN ── */
+    #boot-screen {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px;
+      font-size: 13px;
+      color: var(--green);
+    }
+
+    #boot-screen .boot-line {
+      opacity: 0;
+      white-space: pre;
+    }
+
+    #boot-skip {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      background: transparent;
+      border: 1px solid var(--muted);
+      color: var(--muted);
+      padding: 6px 16px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    #boot-skip:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── MAIN CONTENT ── */
+    #app {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 100px;
+      opacity: 0;
+      transition: opacity 0.8s;
+    }
+    #app.visible { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      border-bottom: 1px solid var(--dark-green);
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--dark-green);
+      border: 1px solid var(--dim-green);
+      color: var(--dim-green);
+      font-size: 11px;
+      letter-spacing: 3px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 52px);
+      color: var(--green);
+      text-shadow: 0 0 20px var(--green), 0 0 40px var(--dim-green);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .hero .title {
+      margin-top: 12px;
+      font-size: 16px;
+      color: var(--dim-green);
+      letter-spacing: 2px;
+    }
+
+    .hero .subtitle {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .hero-contacts {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .hero-contacts a {
+      color: var(--dim-green);
+      text-decoration: none;
+      border: 1px solid var(--dark-green);
+      padding: 4px 12px;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    .hero-contacts a:hover {
+      color: var(--green);
+      border-color: var(--green);
+      box-shadow: 0 0 8px var(--dim-green);
+    }
+
+    /* ── STATUS BAR ── */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--dark-green);
+      margin: 30px 0;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .status-bar .blink {
+      animation: blink 1s step-end infinite;
+      color: var(--green);
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── SECTION ── */
+    .section {
+      margin: 40px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--dark-green);
+    }
+
+    .section-header h2 {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+
+    .section-header .prompt {
+      color: var(--dim-green);
+      font-size: 13px;
+    }
+
+    /* ── SUMMARY ── */
+    .summary-box {
+      background: var(--surface);
+      border: 1px solid var(--dark-green);
+      border-left: 3px solid var(--green);
+      padding: 20px 24px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .summary-box:hover { background: var(--surface2); }
+
+    .summary-box .honest-mode {
+      display: none;
+      color: var(--yellow);
+    }
+    .summary-box.flipped .pr-mode { display: none; }
+    .summary-box.flipped .honest-mode { display: block; }
+
+    .summary-toggle {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--dark-green);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--green);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .skill-card:hover { border-color: var(--green); box-shadow: 0 0 12px rgba(0,255,65,0.15); }
+    .skill-card:hover::before { opacity: 0.04; }
+
+    .skill-card .skill-name {
+      font-size: 13px;
+      color: var(--green);
+      margin-bottom: 4px;
+    }
+    .skill-card .skill-level {
+      height: 3px;
+      background: var(--dark-green);
+      border-radius: 2px;
+      margin: 6px 0;
+      overflow: hidden;
+    }
+    .skill-card .skill-level-fill {
+      height: 100%;
+      background: var(--green);
+      width: 0%;
+      transition: width 1.2s cubic-bezier(.17,.67,.56,1.2);
+      box-shadow: 0 0 6px var(--green);
+    }
+    .skill-card .skill-snark {
+      font-size: 11px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── TOOLTIP ── */
+    #skill-tooltip {
+      position: fixed;
+      background: #000;
+      border: 1px solid var(--green);
+      color: var(--yellow);
+      padding: 10px 14px;
+      font-size: 12px;
+      max-width: 280px;
+      z-index: 5000;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      line-height: 1.5;
+      box-shadow: 0 0 20px rgba(0,255,65,0.2);
+    }
+    #skill-tooltip.visible { opacity: 1; }
+
+    /* ── EXPERIENCE ── */
+    .job-card {
+      background: var(--surface);
+      border: 1px solid var(--dark-green);
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .job-card:hover { border-color: var(--dim-green); }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px 20px;
+      cursor: pointer;
+      gap: 12px;
+    }
+    .job-header:hover .job-company { color: var(--green); }
+
+    .job-company {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--dim-green);
+      transition: color 0.2s;
+      letter-spacing: 1px;
+    }
+    .job-role {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .job-date {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .job-toggle {
+      color: var(--dim-green);
+      font-size: 16px;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .job-card.open .job-toggle { transform: rotate(90deg); }
+
+    .job-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      border-top: 0px solid var(--dark-green);
+    }
+    .job-card.open .job-body {
+      max-height: 500px;
+      border-top: 1px solid var(--dark-green);
+    }
+
+    .job-body-inner {
+      padding: 16px 20px;
+    }
+
+    .job-fact {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    .job-fact .arrow { color: var(--green); flex-shrink: 0; }
+    .job-fact .official { color: var(--text); }
+    .job-fact .snark {
+      color: var(--yellow);
+      font-style: italic;
+      display: block;
+      margin-top: 2px;
+      font-size: 11px;
+    }
+
+    /* ── EASTER EGG / KONAMI ── */
+    #konami-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 20000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      padding: 40px;
+    }
+    #konami-overlay.show { display: flex; }
+    #konami-overlay h2 {
+      color: var(--green);
+      font-size: 28px;
+      text-shadow: 0 0 20px var(--green);
+      letter-spacing: 3px;
+    }
+    #konami-overlay p { color: var(--yellow); max-width: 500px; line-height: 1.8; }
+    #konami-close {
+      background: transparent;
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 10px 30px;
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      letter-spacing: 2px;
+      transition: all 0.2s;
+    }
+    #konami-close:hover { background: var(--green); color: #000; }
+
+    /* ── HIRE ME BUTTON ── */
+    .hire-section {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid var(--dark-green);
+      margin-top: 40px;
+    }
+    .hire-section p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    #hire-btn {
+      background: transparent;
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 14px 40px;
+      font-family: inherit;
+      font-size: 14px;
+      letter-spacing: 3px;
+      cursor: pointer;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    #hire-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--green);
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+    }
+    #hire-btn:hover::before { transform: translateX(0); }
+    #hire-btn:hover { color: #000; box-shadow: 0 0 20px var(--green); }
+    #hire-btn span { position: relative; z-index: 1; }
+
+    #hire-response {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--yellow);
+      min-height: 22px;
+      font-style: italic;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .metric-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .metric-label {
+      font-size: 11px;
+      color: var(--muted);
+      width: 200px;
+      flex-shrink: 0;
+    }
+    .metric-bar {
+      flex: 1;
+      height: 4px;
+      background: var(--dark-green);
+      position: relative;
+      overflow: hidden;
+    }
+    .metric-bar-fill {
+      height: 100%;
+      background: var(--green);
+      width: 0%;
+      transition: width 1.5s cubic-bezier(.17,.67,.36,1);
+      box-shadow: 0 0 6px var(--green);
+    }
+    .metric-val {
+      font-size: 11px;
+      color: var(--green);
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── CURSOR ── */
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: var(--green);
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    /* ── GLITCH ── */
+    @keyframes glitch {
+      0%, 100% { text-shadow: 0 0 20px var(--green); }
+      20% { text-shadow: -3px 0 var(--red), 3px 0 var(--blue); }
+      40% { text-shadow: 3px 0 var(--red), -3px 0 var(--blue); }
+      60% { text-shadow: 0 0 20px var(--green); }
+      80% { text-shadow: 2px 2px var(--red), -2px -2px var(--blue); }
+    }
+
+    .glitch-hover:hover {
+      animation: glitch 0.4s linear;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid var(--dark-green);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .metric-label { width: 140px; font-size: 10px; }
+      #boot-screen { padding: 30px; font-size: 11px; }
+    }
+
+    /* ── ACHIEVEMENT TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--surface2);
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 12px 20px;
+      font-size: 12px;
+      z-index: 9000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s;
+      max-width: 300px;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #toast .toast-title {
+      font-size: 10px;
+      color: var(--yellow);
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+
+<!-- BOOT SCREEN -->
+<div id="boot-screen">
+  <div class="boot-line">BIOS v3.14.159 — Rossmann Engineering Systems</div>
+  <div class="boot-line">Detecting hardware...</div>
+  <div class="boot-line">CPU: Brain™ (Overclocked, usually) ........ OK</div>
+  <div class="boot-line">RAM: 10+ years of accumulated trauma ....... OK</div>
+  <div class="boot-line">GPU: Qualcomm AI100 (not the 128-core one). OK</div>
+  <div class="boot-line">Ego: Within normal operating parameters ..... WARNING</div>
+  <div class="boot-line">Coffee reserves: CRITICAL ................... ERROR</div>
+  <div class="boot-line">&nbsp;</div>
+  <div class="boot-line">Loading CV kernel... do not turn off this browser tab.</div>
+  <div class="boot-line">Compressing imposter syndrome into manageable modules...</div>
+  <div class="boot-line">Inflating accomplishments by legally permissible margin... done.</div>
+  <div class="boot-line">Removing references to that one production incident... done.</div>
+  <div class="boot-line">&nbsp;</div>
+  <div class="boot-line" id="boot-done">[ OK ] System ready. Welcome.</div>
+  <button id="boot-skip">SKIP INTRO [ESC]</button>
+</div>
+
+<!-- TOOLTIP -->
+<div id="skill-tooltip"></div>
+
+<!-- KONAMI EASTER EGG -->
+<div id="konami-overlay">
+  <h2>🎉 CHEAT CODE ACCEPTED 🎉</h2>
+  <p>
+    You found the Konami code. Congratulations — you are exactly the kind of
+    engineer Aviad wants to work with.<br><br>
+    Fun fact: this entire CV was architected with the same obsessive attention to
+    detail as a zero-copy DMA buffer pipeline.<br><br>
+    Unfortunately, there is no extra life. There is only <span style="color:var(--green)">more C++</span>.
+  </p>
+  <button id="konami-close">CLOSE (YOU CAN'T UNHIRE ME NOW)</button>
+</div>
+
+<!-- ACHIEVEMENT TOAST -->
+<div id="toast">
+  <div class="toast-title">ACHIEVEMENT UNLOCKED</div>
+  <div id="toast-msg"></div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">// CV_v10.3 — Compiled Without Warnings</div>
+    <h1 class="glitch-hover">AVIAD ROSSMANN</h1>
+    <div class="title">Senior Staff Software Engineer</div>
+    <div class="subtitle">
+      aka: "the guy everyone calls at 3am when the inference cluster is on fire"
+    </div>
+    <div class="hero-contacts">
+      <a href="mailto:aviad.rossmann@gmail.com">aviad.rossmann@gmail.com</a>
+      <a href="https://linkedin.com/in/aviadrossmann" target="_blank">LinkedIn</a>
+      <a href="https://github.com/DEADCODEX" target="_blank">GitHub: DEADCODEX</a>
+      <span style="color:var(--muted);font-size:12px;padding:4px 0">📍 Tel Aviv, Israel</span>
+    </div>
+  </header>
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <span>USER: aviad@production-cluster</span>
+    <span>UPTIME: 10+ years</span>
+    <span>STATUS: <span class="blink">AVAILABLE_FOR_HIRE ▮</span></span>
+    <span>COFFEE: <span style="color:var(--red)">CRITICAL</span></span>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="prompt">$</span>
+      <h2>cat executive_summary.txt</h2>
+    </div>
+    <div class="summary-box" id="summary-box" title="Click to toggle honesty mode">
+      <span class="summary-toggle">[ click to toggle: HONEST MODE ]</span>
+      <div class="pr-mode">
+        Senior Systems Engineer with 10+ years in low-level optimization and hardware-aware software design.
+        Recently pivoted deep systems expertise into Generative AI Infrastructure — architecting multi-node
+        LLM inference systems that outperform legacy x86 deployments. Specializes in translating
+        embedded-system constraints (latency, memory, throughput, determinism) into measurable
+        efficiency gains in large-scale cloud AI serving environments.
+      </div>
+      <div class="honest-mode">
+        ⚠️ HONEST MODE ENGAGED ⚠️<br><br>
+        Spent a decade convincing computers to go faster by poking them in increasingly arcane ways.
+        Recently started telling <em>AI</em> computers to go faster, which is the same job but with
+        more buzzwords on the invoice.<br><br>
+        Genuinely enjoys finding the one misaligned cache line that costs you 17% throughput. Most people
+        think that's terrifying. He finds it <em>cozy</em>. His idea of fun is reading perf flamegraphs
+        for breakfast. No, he's not okay. Yes, he's available.
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="prompt">$</span>
+      <h2>htop --human-readable</h2>
+    </div>
+    <div class="metric-row">
+      <div class="metric-label">Low-level wizardry</div>
+      <div class="metric-bar"><div class="metric-bar-fill" data-val="97"></div></div>
+      <div class="metric-val">97%</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-label">Making fewer cores win</div>
+      <div class="metric-bar"><div class="metric-bar-fill" data-val="94"></div></div>
+      <div class="metric-val">94%</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-label">Explaining why it's slow</div>
+      <div class="metric-bar"><div class="metric-bar-fill" data-val="99"></div></div>
+      <div class="metric-val">99%</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-label">Tolerating meetings</div>
+      <div class="metric-bar"><div class="metric-bar-fill" data-val="23"></div></div>
+      <div class="metric-val">23%</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-label">Pretending JIRA is useful</div>
+      <div class="metric-bar"><div class="metric-bar-fill" data-val="11"></div></div>
+      <div class="metric-val">11%</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-label">Thriving on 3am incidents</div>
+      <div class="metric-bar"><div class="metric-bar-fill" data-val="88"></div></div>
+      <div class="metric-val">88%</div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="prompt">$</span>
+      <h2>ls ./skills/ — hover for honest descriptions</h2>
+    </div>
+    <div class="skills-grid" id="skills-grid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="prompt">$</span>
+      <h2>cat experience.log | grep -v "boring parts"</h2>
+    </div>
+    <div id="jobs-list">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+
+  <!-- EDUCATION / IDF -->
+  <div class="section">
+    <div class="section-header">
+      <span class="prompt">$</span>
+      <h2>cat formation.txt</h2>
+    </div>
+
+    <div class="job-card" id="idf-card">
+      <div class="job-header" onclick="toggleJob('idf-card')">
+        <div>
+          <div class="job-company">ISRAEL DEFENSE FORCES</div>
+          <div class="job-role">System Engineer &amp; Team Lead</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div class="job-date">2009 – 2015</div>
+          <div class="job-toggle">▶</div>
+        </div>
+      </div>
+      <div class="job-body">
+        <div class="job-body-inner">
+          <div class="job-fact">
+            <span class="arrow">→</span>
+            <div>
+              <span class="official">Led rapid development of C/C++ operational systems from concept to battlefield deployment.</span>
+              <span class="snark">Translation: shipped under deadlines where "ship or else" had a very literal meaning.</span>
+            </div>
+          </div>
+          <div class="job-fact">
+            <span class="arrow">→</span>
+            <div>
+              <span class="official">Managed small engineering teams under high-pressure, mission-critical constraints.</span>
+              <span class="snark">Nothing cures perfectionism like bullets being optional feedback.</span>
+            </div>
+          </div>
+          <div class="job-fact">
+            <span class="arrow">→</span>
+            <div>
+              <span class="official">6 years of intensive systems engineering before "cloud-native" was a word people said seriously.</span>
+              <span class="snark">He was doing DevOps before DevOps had a LinkedIn influencer community.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="job-card" id="uni-card" style="margin-top:8px">
+      <div class="job-header" onclick="toggleJob('uni-card')">
+        <div>
+          <div class="job-company">BAR-ILAN UNIVERSITY</div>
+          <div class="job-role">B.Sc. Electrical Engineering</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div class="job-date">2005 – 2009</div>
+          <div class="job-toggle">▶</div>
+        </div>
+      </div>
+      <div class="job-body">
+        <div class="job-body-inner">
+          <div class="job-fact">
+            <span class="arrow">→</span>
+            <div>
+              <span class="official">B.Sc. in Electrical Engineering — the degree that teaches you transistors so you can spend your career debugging segfaults.</span>
+              <span class="snark">100% of the math was useful. 40% has been used. 5% has been used correctly.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIRE ME -->
+  <div class="hire-section">
+    <p>
+      // Warning: hiring this engineer may result in your infrastructure becoming unreasonably fast.<br>
+      // Side effects include: colleagues asking "wait, how did you do that?" and flamegraphs becoming
+      your new desktop wallpaper.
+    </p>
+    <button id="hire-btn" onclick="handleHire()">
+      <span id="hire-btn-text">INITIATE_HIRE SEQUENCE</span>
+    </button>
+    <div id="hire-response"></div>
+  </div>
+
+  <footer>
+    <p>Built with: HTML, CSS, JS, 10 years of scar tissue, and zero React.</p>
+    <p style="margin-top:6px">↑↑↓↓←→←→BA — try it. You know you want to.</p>
+    <p style="margin-top:6px;color:#2a4a2a">v1.0.0 — compiled without warnings. unlike most of the codebases he inherited.</p>
+  </footer>
+
+</div><!-- /app -->
+
+<script>
+// ─────────────────────────────────────────────
+//  MATRIX RAIN
+// ─────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('matrix-canvas');
+  const ctx = canvas.getContext('2d');
+  let cols, drops;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    cols = Math.floor(canvas.width / 16);
+    drops = Array(cols).fill(1);
+  }
+
+  function draw() {
+    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#00ff41';
+    ctx.font = '14px monospace';
+    drops.forEach((y, i) => {
+      const ch = String.fromCharCode(0x30A0 + Math.random() * 96);
+      ctx.fillText(ch, i * 16, y * 16);
+      if (y * 16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    });
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  setInterval(draw, 60);
+})();
+
+// ─────────────────────────────────────────────
+//  BOOT SEQUENCE
+// ─────────────────────────────────────────────
+(function() {
+  const lines = document.querySelectorAll('#boot-screen .boot-line');
+  let i = 0;
+
+  function showLine() {
+    if (i < lines.length) {
+      lines[i].style.opacity = '1';
+      i++;
+      setTimeout(showLine, i < 8 ? 220 : 350);
+    } else {
+      setTimeout(endBoot, 900);
+    }
+  }
+
+  function endBoot() {
+    const screen = document.getElementById('boot-screen');
+    screen.style.transition = 'opacity 0.6s';
+    screen.style.opacity = '0';
+    setTimeout(() => {
+      screen.style.display = 'none';
+      document.getElementById('app').classList.add('visible');
+      setTimeout(animateMetrics, 300);
+      setTimeout(animateSkills, 500);
+    }, 600);
+  }
+
+  document.getElementById('boot-skip').addEventListener('click', endBoot);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') endBoot();
+  });
+
+  setTimeout(showLine, 400);
+})();
+
+// ─────────────────────────────────────────────
+//  SKILLS DATA
+// ─────────────────────────────────────────────
+const skills = [
+  {
+    name: 'C / C++ (Modern)',
+    level: 97,
+    snark: 'Fluent in undefined behavior',
+    tooltip: 'Can write C++ that actually compiles on the first try. One of about 40 people worldwide who understand move semantics without lying about it.'
+  },
+  {
+    name: 'LLM Serving (vLLM)',
+    level: 90,
+    snark: 'Teaching GPUs to hallucinate faster',
+    tooltip: 'Architected inference stacks that made an 8-core ARM server beat a 128-core Intel x86. The 128-core team did not find this funny.'
+  },
+  {
+    name: 'Linux Kernel & User-Space',
+    level: 95,
+    snark: 'Has opinions on scheduling policies',
+    tooltip: 'Relationship status with the Linux kernel: it\'s complicated. Knows where the bodies are buried (hint: /proc/sys/vm).'
+  },
+  {
+    name: 'CUDA & GPU Pipelines',
+    level: 85,
+    snark: 'Makes GPUs do non-gaming things',
+    tooltip: 'Optimizes workloads that cost more per hour than most people\'s rent. No pressure.'
+  },
+  {
+    name: 'Memory Management',
+    level: 96,
+    snark: 'malloc() has trust issues',
+    tooltip: 'Can describe 14 different memory allocation strategies and when each one will destroy you. Has seen production go down over a 4-byte alignment.'
+  },
+  {
+    name: 'Zero-Copy DMA Buffers',
+    level: 88,
+    snark: 'Allergic to unnecessary memcpy()',
+    tooltip: 'Eliminated host-device transfer overhead by integrating DMA buffers into a custom vLLM fork. This is the kind of thing that\'s impossible until it isn\'t.'
+  },
+  {
+    name: 'ARM Neoverse & NEON',
+    level: 89,
+    snark: 'Knows ARM better than most x86 folks',
+    tooltip: 'Worked on ARM systems before it was cool. Now it\'s cool and he has opinions about it. Many opinions.'
+  },
+  {
+    name: 'Distributed Inference',
+    level: 87,
+    snark: 'Multi-node, maximum suffering',
+    tooltip: 'Designing multi-node LLM serving systems. The hardest part isn\'t the network — it\'s explaining why the network is the hardest part.'
+  },
+  {
+    name: 'Lock-Free Concurrency',
+    level: 91,
+    snark: 'Mutex? We don\'t do that here',
+    tooltip: 'Writes lock-free data structures recreationally. Has the memory ordering scars to prove it. ABA problem? His nemesis. His recurring nightmare. His friend.'
+  },
+  {
+    name: 'Perf Profiling',
+    level: 98,
+    snark: 'Reads flamegraphs for fun',
+    tooltip: 'The flamegraph is not a problem indicator. The flamegraph is art. He has found a 17% throughput gain by staring at one long enough.'
+  },
+  {
+    name: 'Real-Time Systems (RTOS)',
+    level: 86,
+    snark: 'Microseconds matter. Always.',
+    tooltip: 'Spent years where "it was a few milliseconds late" was genuinely unacceptable. Your web app\'s 200ms API call physically pains him.'
+  },
+  {
+    name: 'Python',
+    level: 78,
+    snark: 'Uses it. Judges it. Still uses it.',
+    tooltip: 'Python is not a religion for him. It is a pragmatic tool that occasionally explodes the GIL in his face. He and Python have an understanding.'
+  }
+];
+
+function renderSkills() {
+  const grid = document.getElementById('skills-grid');
+  skills.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    card.innerHTML = `
+      <div class="skill-name">${s.name}</div>
+      <div class="skill-level"><div class="skill-level-fill" data-val="${s.level}"></div></div>
+      <div class="skill-snark">${s.snark}</div>
+    `;
+    card.addEventListener('mouseenter', e => showTooltip(e, s.tooltip));
+    card.addEventListener('mouseleave', hideTooltip);
+    card.addEventListener('mousemove', moveTooltip);
+    grid.appendChild(card);
+  });
+}
+
+renderSkills();
+
+function animateSkills() {
+  document.querySelectorAll('.skill-level-fill').forEach((el, i) => {
+    setTimeout(() => {
+      el.style.width = el.dataset.val + '%';
+    }, i * 60);
+  });
+}
+
+// ─────────────────────────────────────────────
+//  TOOLTIP
+// ─────────────────────────────────────────────
+const tooltip = document.getElementById('skill-tooltip');
+let mouseX = 0, mouseY = 0;
+
+function showTooltip(e, text) {
+  tooltip.textContent = text;
+  tooltip.classList.add('visible');
+}
+function hideTooltip() { tooltip.classList.remove('visible'); }
+function moveTooltip(e) {
+  let x = e.clientX + 18, y = e.clientY + 18;
+  if (x + 290 > window.innerWidth) x = e.clientX - 300;
+  if (y + 80 > window.innerHeight) y = e.clientY - 90;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top = y + 'px';
+}
+
+// ─────────────────────────────────────────────
+//  METRICS ANIMATION
+// ─────────────────────────────────────────────
+function animateMetrics() {
+  document.querySelectorAll('.metric-bar-fill').forEach((el, i) => {
+    setTimeout(() => {
+      el.style.width = el.dataset.val + '%';
+    }, i * 100);
+  });
+}
+
+// ─────────────────────────────────────────────
+//  JOBS DATA
+// ─────────────────────────────────────────────
+const jobs = [
+  {
+    id: 'job-neureality',
+    company: 'NEUREALITY',
+    role: 'Senior Software Engineer — LLM Infrastructure Lead',
+    date: 'Feb 2025 – Present',
+    facts: [
+      {
+        official: 'Lead architect for high-performance LLM inference on ARM Neoverse servers accelerated by Qualcomm AI100.',
+        snark: 'Chief Priest of the Church of Making Fewer Cores Do More Work.'
+      },
+      {
+        official: 'Engineered a serving stack where an 8-core ARM Neoverse N1 outperformed a 128-core Intel x86 under concurrent OpenAI-compatible workloads.',
+        snark: 'Technically made Intel look bad with one-sixteenth of the cores. Did not send them a card.'
+      },
+      {
+        official: 'Designed and implemented zero-copy DMA buffer integration into a custom vLLM fork, eliminating host-device transfer overhead.',
+        snark: '"Eliminating overhead" is engineer for "I stared at memory maps until they confessed."'
+      },
+      {
+        official: 'Conducted deep system profiling and unlocked 17% throughput gain per server instance.',
+        snark: '17% might sound modest. It is not modest. It is the kind of number that makes infra managers cry tears of joy.'
+      }
+    ]
+  },
+  {
+    id: 'job-leddar',
+    company: 'LEDDARTECH',
+    role: 'Senior Software Engineer — Embedded ML / ADAS',
+    date: 'Oct 2021 – Feb 2025',
+    facts: [
+      {
+        official: 'Developed C++ and Python frameworks for real-time ML inference in automotive (ADAS) environments.',
+        snark: 'Wrote software that runs in cars. A car. Going at speed. Near humans. No big deal.'
+      },
+      {
+        official: 'Performed GPU workload optimization and system-level profiling in resource-constrained environments.',
+        snark: '"Resource-constrained" is a polite way of saying "the GPU had the RAM of a 2009 netbook and still had to run a neural network."'
+      },
+      {
+        official: 'Delivered production-grade Linux and OpenCV-based infrastructure components.',
+        snark: 'Did you know OpenCV has 4,000 functions and 3,990 of them are underdocumented? He knows.'
+      }
+    ]
+  },
+  {
+    id: 'job-zixi',
+    company: 'ZIXI',
+    role: 'SDK Team Lead — Video Streaming Infrastructure',
+    date: 'Jan 2021 – Sep 2021',
+    facts: [
+      {
+        official: 'Led SDK release cycle and partner integrations.',
+        snark: 'Translation: managed the part where your code has to work on someone else\'s machine. It didn\'t. Then it did.'
+      },
+      {
+        official: 'Designed Docker-based cross-distribution Linux build systems.',
+        snark: '"Works on my machine" → builds Docker image → "Works on all machines." Revolutionary. Yes, he wants a medal.'
+      }
+    ]
+  },
+  {
+    id: 'job-pan',
+    company: 'PALO ALTO NETWORKS',
+    role: 'Senior Staff Software Engineer — Endpoint Security',
+    date: 'Jun 2019 – Mar 2020',
+    facts: [
+      {
+        official: 'Designed scalable cross-platform security infrastructure using C++14 and Boost.',
+        snark: 'Boost: for when you want 47 template error messages instead of 1. He speaks fluent Boost.'
+      },
+      {
+        official: 'Achieved significant reductions in CPU and memory usage for endpoint security agents.',
+        snark: 'Made the security agent that runs on your laptop stop hogging 30% CPU like it owns the place.'
+      }
+    ]
+  },
+  {
+    id: 'job-samsung',
+    company: 'SAMSUNG ISRAEL R&D (SIRC)',
+    role: 'Software Engineer — Embedded Android & Hardware Acceleration',
+    date: 'Aug 2015 – May 2019',
+    facts: [
+      {
+        official: 'Designed multi-threaded C++ systems for embedded platforms.',
+        snark: 'Multi-threading: the art of making two bugs run simultaneously at twice the speed.'
+      },
+      {
+        official: 'Optimized ARM-based algorithms using NEON and OpenCL.',
+        snark: 'NEON intrinsics: the dark arts of extracting performance by rearranging data 128 bits at a time, hoping no one asks you to explain it.'
+      },
+      {
+        official: 'Implemented Hardware Abstraction Layers (HAL) for image processing accelerators.',
+        snark: 'HAL: the polite fiction that hardware differences don\'t matter. They do. He hid them anyway.'
+      }
+    ]
+  }
+];
+
+function renderJobs() {
+  const container = document.getElementById('jobs-list');
+  jobs.forEach(job => {
+    const card = document.createElement('div');
+    card.className = 'job-card';
+    card.id = job.id;
+
+    const factsHTML = job.facts.map(f => `
+      <div class="job-fact">
+        <span class="arrow">→</span>
+        <div>
+          <span class="official">${f.official}</span>
+          <span class="snark">${f.snark}</span>
+        </div>
+      </div>
+    `).join('');
+
+    card.innerHTML = `
+      <div class="job-header" onclick="toggleJob('${job.id}')">
+        <div>
+          <div class="job-company">${job.company}</div>
+          <div class="job-role">${job.role}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div class="job-date">${job.date}</div>
+          <div class="job-toggle">▶</div>
+        </div>
+      </div>
+      <div class="job-body">
+        <div class="job-body-inner">${factsHTML}</div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+renderJobs();
+
+function toggleJob(id) {
+  const card = document.getElementById(id);
+  const wasOpen = card.classList.contains('open');
+  // close all
+  document.querySelectorAll('.job-card.open').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) card.classList.add('open');
+}
+
+// ─────────────────────────────────────────────
+//  SUMMARY TOGGLE
+// ─────────────────────────────────────────────
+document.getElementById('summary-box').addEventListener('click', function() {
+  this.classList.toggle('flipped');
+  showToastMsg('Honesty module: ' + (this.classList.contains('flipped') ? 'ENABLED' : 'DISABLED'));
+});
+
+// ─────────────────────────────────────────────
+//  HIRE ME
+// ─────────────────────────────────────────────
+const hireMessages = [
+  '> Excellent choice. Your infrastructure just got 17% faster by osmosis.',
+  '> Processing... please send calendar invite. He\'ll ignore the first two.',
+  '> Warning: hiring this engineer may cause irreversible optimization of all your systems.',
+  '> Request logged. Estimated response time: faster than your current inference pipeline.',
+  '> Confirmed. Please prepare a perf flamegraph as a welcoming gift.',
+  '> The arm cores are celebrating. The x86 cores are embarrassed.',
+  '> He is already refactoring your codebase in his head. It is not going well for your codebase.',
+];
+let hireCount = 0;
+
+function handleHire() {
+  const btn = document.getElementById('hire-btn');
+  const resp = document.getElementById('hire-response');
+  const btnText = document.getElementById('hire-btn-text');
+  btnText.textContent = 'PROCESSING...';
+  btn.disabled = true;
+  setTimeout(() => {
+    resp.textContent = hireMessages[hireCount % hireMessages.length];
+    hireCount++;
+    btnText.textContent = hireCount === 1 ? 'CONFIRM_HIRE (AGAIN)' : 'YES, AGAIN';
+    btn.disabled = false;
+    showToastMsg('Hire request #' + hireCount + ' received.');
+  }, 800);
+}
+
+// ─────────────────────────────────────────────
+//  TOAST
+// ─────────────────────────────────────────────
+let toastTimer = null;
+function showToastMsg(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ─────────────────────────────────────────────
+//  KONAMI CODE
+// ─────────────────────────────────────────────
+const konami = [38,38,40,40,37,39,37,39,66,65];
+let konamiIdx = 0;
+document.addEventListener('keydown', e => {
+  if (e.keyCode === konami[konamiIdx]) {
+    konamiIdx++;
+    if (konamiIdx === konami.length) {
+      document.getElementById('konami-overlay').classList.add('show');
+      konamiIdx = 0;
+    }
+  } else {
+    konamiIdx = 0;
+  }
+});
+document.getElementById('konami-close').addEventListener('click', () => {
+  document.getElementById('konami-overlay').classList.remove('show');
+  showToastMsg('You are now legally obligated to send a calendar invite.');
+});
+
+// ─────────────────────────────────────────────
+//  CLICK COUNTER EASTER EGG
+// ─────────────────────────────────────────────
+let clickCount = 0;
+document.querySelector('.hero h1').addEventListener('click', () => {
+  clickCount++;
+  const msgs = [
+    'Please don\'t.',
+    'Still here.',
+    'Impressive commitment.',
+    'He has ignored production alerts with more patience than this.',
+    'Fine. You win. Email him.',
+    '...',
+    'Okay this is getting weird.',
+    'Seriously though: aviad.rossmann@gmail.com'
+  ];
+  showToastMsg(msgs[Math.min(clickCount - 1, msgs.length - 1)]);
+});
+</script>
+</body>
+</html>
