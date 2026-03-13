@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aviad Rossmann — Senior Staff Engineer (Probably Overqualified For Your Role)</title>
+  <title>Aviad Rossmann — If it's hidden… he'll find it.</title>
   <style>
     :root {
       --green: #00ff41;
@@ -363,7 +363,7 @@
       border-top: 0px solid var(--dark-green);
     }
     .job-card.open .job-body {
-      max-height: 500px;
+      max-height: 700px;
       border-top: 1px solid var(--dark-green);
     }
 
@@ -579,18 +579,21 @@
 
 <!-- BOOT SCREEN -->
 <div id="boot-screen">
-  <div class="boot-line">BIOS v3.14.159 — Rossmann Engineering Systems</div>
+  <div class="boot-line">BIOS v3.14.159 — Rossmann Engineering Systems (ARM Edition)</div>
   <div class="boot-line">Detecting hardware...</div>
-  <div class="boot-line">CPU: Brain™ (Overclocked, usually) ........ OK</div>
-  <div class="boot-line">RAM: 10+ years of accumulated trauma ....... OK</div>
-  <div class="boot-line">GPU: Qualcomm AI100 (not the 128-core one). OK</div>
-  <div class="boot-line">Ego: Within normal operating parameters ..... WARNING</div>
-  <div class="boot-line">Coffee reserves: CRITICAL ................... ERROR</div>
+  <div class="boot-line">CPU: Brain™ (Overclocked, usually) .................. OK</div>
+  <div class="boot-line">RAM: 10+ years of accumulated scar tissue ............ OK</div>
+  <div class="boot-line">NPU: Qualcomm AI100 (beats your 128-core x86) ....... OK</div>
+  <div class="boot-line">TensorRT engine: serialized &amp; optimized .............. OK</div>
+  <div class="boot-line">Ego: Within legally permissible parameters ........... WARNING</div>
+  <div class="boot-line">Coffee reserves: ..................................... CRITICAL</div>
+  <div class="boot-line">QNX integration: loaded ............................. OK</div>
   <div class="boot-line">&nbsp;</div>
   <div class="boot-line">Loading CV kernel... do not turn off this browser tab.</div>
-  <div class="boot-line">Compressing imposter syndrome into manageable modules...</div>
+  <div class="boot-line">Compressing imposter syndrome into manageable modules... done.</div>
   <div class="boot-line">Inflating accomplishments by legally permissible margin... done.</div>
   <div class="boot-line">Removing references to that one production incident... done.</div>
+  <div class="boot-line">If it's undocumented, reversing it..................... done.</div>
   <div class="boot-line">&nbsp;</div>
   <div class="boot-line" id="boot-done">[ OK ] System ready. Welcome.</div>
   <button id="boot-skip">SKIP INTRO [ESC]</button>
@@ -625,14 +628,16 @@
   <header class="hero">
     <div class="hero-badge">// CV_v10.3 — Compiled Without Warnings</div>
     <h1 class="glitch-hover">AVIAD ROSSMANN</h1>
-    <div class="title">Senior Staff Software Engineer</div>
-    <div class="subtitle">
-      aka: "the guy everyone calls at 3am when the inference cluster is on fire"
+    <div class="title">Senior Software Engineer &nbsp;|&nbsp; C++ / Python / ML Inference / GPUs &amp; Accelerators</div>
+    <div class="subtitle" id="hero-tagline" style="cursor:pointer" title="click to see what comes next...">
+      "If it's broken, I'll fix it. If it's undocumented, I'll reverse it. If it's hidden…"
+      <span id="tagline-reveal" style="display:none;color:var(--green)"> I'll find it. Then optimize it.</span>
     </div>
     <div class="hero-contacts">
+      <a href="tel:+972524624891">+972-52-462-4891</a>
       <a href="mailto:aviad.rossmann@gmail.com">aviad.rossmann@gmail.com</a>
       <a href="https://linkedin.com/in/aviadrossmann" target="_blank">LinkedIn</a>
-      <a href="https://github.com/DEADCODEX" target="_blank">GitHub: DEADCODEX</a>
+      <a href="https://github.com/DEADC0DEx" target="_blank">GitHub: DEADC0DEx</a>
       <span style="color:var(--muted);font-size:12px;padding:4px 0">📍 Tel Aviv, Israel</span>
     </div>
   </header>
@@ -654,20 +659,24 @@
     <div class="summary-box" id="summary-box" title="Click to toggle honesty mode">
       <span class="summary-toggle">[ click to toggle: HONEST MODE ]</span>
       <div class="pr-mode">
-        Senior Systems Engineer with 10+ years in low-level optimization and hardware-aware software design.
-        Recently pivoted deep systems expertise into Generative AI Infrastructure — architecting multi-node
-        LLM inference systems that outperform legacy x86 deployments. Specializes in translating
-        embedded-system constraints (latency, memory, throughput, determinism) into measurable
-        efficiency gains in large-scale cloud AI serving environments.
+        Senior software engineer with 10+ years delivering high-performance solutions in C, C++, Python,
+        and embedded systems. Expert in algorithm optimization, software infrastructure, and cross-platform
+        integration — with deep experience in OpenCL, OpenCV, TensorRT (profiling, engine serialization,
+        and optimization), and GPU/accelerator programming. Hands-on with hardware-level performance tuning
+        across ARM (NEON), x86, and dedicated AI accelerators (Qualcomm AI100).<br><br>
+        <span style="color:var(--dim-green);font-style:italic">
+          "I approach engineering like a puzzle — knowing when to follow the rules, and when to bend them into elegant hacks."
+        </span>
       </div>
       <div class="honest-mode">
         ⚠️ HONEST MODE ENGAGED ⚠️<br><br>
-        Spent a decade convincing computers to go faster by poking them in increasingly arcane ways.
-        Recently started telling <em>AI</em> computers to go faster, which is the same job but with
-        more buzzwords on the invoice.<br><br>
-        Genuinely enjoys finding the one misaligned cache line that costs you 17% throughput. Most people
-        think that's terrifying. He finds it <em>cozy</em>. His idea of fun is reading perf flamegraphs
-        for breakfast. No, he's not okay. Yes, he's available.
+        Spent a decade convincing computers to go faster using increasingly arcane techniques.
+        Fluent in C, C++, Python, QNX, OpenCL, TensorRT, and the specific brand of existential dread
+        that comes from debugging a Python/C++ inference discrepancy at 2am.<br><br>
+        Has written real-time systems for cars, weapons, cameras, and AI clusters.
+        The one thing connecting all of them: someone, somewhere, said "it's fast enough" — and he disagreed.
+        He was right every time. He has the perf flamegraphs to prove it.<br><br>
+        No, the Jinja2 code generator was not necessary. Yes, it was worth it.
       </div>
     </div>
   </div>
@@ -743,10 +752,10 @@
       <div class="job-header" onclick="toggleJob('idf-card')">
         <div>
           <div class="job-company">ISRAEL DEFENSE FORCES</div>
-          <div class="job-role">System Engineer &amp; Team Lead</div>
+          <div class="job-role">Software / System Engineer &amp; Team Lead</div>
         </div>
         <div style="display:flex;align-items:center;gap:16px">
-          <div class="job-date">2009 – 2015</div>
+          <div class="job-date">Sep 2009 – Aug 2015</div>
           <div class="job-toggle">▶</div>
         </div>
       </div>
@@ -755,22 +764,29 @@
           <div class="job-fact">
             <span class="arrow">→</span>
             <div>
-              <span class="official">Led rapid development of C/C++ operational systems from concept to battlefield deployment.</span>
-              <span class="snark">Translation: shipped under deadlines where "ship or else" had a very literal meaning.</span>
+              <span class="official">Moved projects from initial concept to implementation on the battlefield; managed rapid development of multiple systems in C, C++, Arduino, Android, and C#.</span>
+              <span class="snark">Stack diversity forced by necessity. "We need it in C#" is a sentence that meant something very different before 2015.</span>
             </div>
           </div>
           <div class="job-fact">
             <span class="arrow">→</span>
             <div>
-              <span class="official">Managed small engineering teams under high-pressure, mission-critical constraints.</span>
-              <span class="snark">Nothing cures perfectionism like bullets being optional feedback.</span>
+              <span class="official">Developed weapons systems and optimized intelligence gathering systems.</span>
+              <span class="snark">The ultimate product requirement: "it must work, it must be fast, and failure is not a post-mortem item." Shipped it anyway.</span>
             </div>
           </div>
           <div class="job-fact">
             <span class="arrow">→</span>
             <div>
-              <span class="official">6 years of intensive systems engineering before "cloud-native" was a word people said seriously.</span>
-              <span class="snark">He was doing DevOps before DevOps had a LinkedIn influencer community.</span>
+              <span class="official">Trained combat forces to deploy operational systems in the field.</span>
+              <span class="snark">User acceptance testing, but the users have rifles. Feedback was direct. There was no JIRA.</span>
+            </div>
+          </div>
+          <div class="job-fact">
+            <span class="arrow">→</span>
+            <div>
+              <span class="official">Audited software across multiple projects and managed small engineering teams under mission-critical pressure.</span>
+              <span class="snark">Led engineers who shipped before "agile" was a buzzword. The real kind of agile: fast, correct, and right now.</span>
             </div>
           </div>
         </div>
@@ -802,6 +818,28 @@
     </div>
   </div>
 
+  <!-- LANGUAGES -->
+  <div class="section">
+    <div class="section-header">
+      <span class="prompt">$</span>
+      <h2>locale -a</h2>
+    </div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap">
+      <div style="background:var(--surface);border:1px solid var(--dark-green);padding:14px 20px;flex:1;min-width:180px">
+        <div style="color:var(--green);font-size:13px;margin-bottom:4px">Hebrew</div>
+        <div style="color:var(--muted);font-size:11px;font-style:italic">Native — thinks in Hebrew, swears in C++</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--dark-green);padding:14px 20px;flex:1;min-width:180px">
+        <div style="color:var(--green);font-size:13px;margin-bottom:4px">English</div>
+        <div style="color:var(--muted);font-size:11px;font-style:italic">Full Professional — including "this shouldn't be possible" and "the spec was ambiguous"</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--dark-green);padding:14px 20px;flex:1;min-width:180px">
+        <div style="color:var(--green);font-size:13px;margin-bottom:4px">C / C++ / Python</div>
+        <div style="color:var(--muted);font-size:11px;font-style:italic">Native — dreams in segfaults</div>
+      </div>
+    </div>
+  </div>
+
   <!-- HIRE ME -->
   <div class="hire-section">
     <p>
@@ -817,8 +855,8 @@
 
   <footer>
     <p>Built with: HTML, CSS, JS, 10 years of scar tissue, and zero React.</p>
-    <p style="margin-top:6px">↑↑↓↓←→←→BA — try it. You know you want to.</p>
-    <p style="margin-top:6px;color:#2a4a2a">v1.0.0 — compiled without warnings. unlike most of the codebases he inherited.</p>
+    <p style="margin-top:6px">Click the tagline. Try the Konami code (↑↑↓↓←→←→BA). Click the name repeatedly.</p>
+    <p style="margin-top:6px;color:#2a4a2a">v2.0.0 — compiled without warnings. unlike most of the codebases he inherited.</p>
   </footer>
 
 </div><!-- /app -->
@@ -899,76 +937,100 @@
 // ─────────────────────────────────────────────
 const skills = [
   {
-    name: 'C / C++ (Modern)',
+    name: 'C / C++ (C++14/17)',
     level: 97,
     snark: 'Fluent in undefined behavior',
-    tooltip: 'Can write C++ that actually compiles on the first try. One of about 40 people worldwide who understand move semantics without lying about it.'
+    tooltip: 'Can write C++ that actually compiles on the first try. One of about 40 people worldwide who understand move semantics without lying about it. Boost? He speaks it like a second language — a very verbose, template-heavy second language.'
   },
   {
     name: 'LLM Serving (vLLM)',
     level: 90,
     snark: 'Teaching GPUs to hallucinate faster',
-    tooltip: 'Architected inference stacks that made an 8-core ARM server beat a 128-core Intel x86. The 128-core team did not find this funny.'
+    tooltip: 'Forked vLLM, added DMA buffer integration, rewrote the OpenAI-compatible server path, selected a better tokenizer, and made an 8-core ARM server beat 128-core Intel x86. The 128-core team has not recovered.'
+  },
+  {
+    name: 'TensorRT (profiling, serialization)',
+    level: 88,
+    snark: 'Engines: serialized. Discrepancies: resolved.',
+    tooltip: 'Deep TensorRT experience including engine serialization, runtime optimization, and the special joy of debugging why the Python model output doesn\'t match the C++ pipeline. (Spoiler: it\'s always precision. Always.)'
+  },
+  {
+    name: 'OpenCV',
+    level: 87,
+    snark: '4,000 functions, 3,990 underdocumented',
+    tooltip: 'Has used OpenCV in ADAS pipelines, embedded cameras, and Android HAL integrations. At this point he and OpenCV are in a long-term, complicated relationship.'
+  },
+  {
+    name: 'Qualcomm AI100',
+    level: 86,
+    snark: 'The accelerator that embarrassed Intel',
+    tooltip: 'Integrating AI100 into real production LLM inference stacks — not demos, not benchmarks. Real serving pipelines. With DMA. In anger.'
   },
   {
     name: 'Linux Kernel & User-Space',
     level: 95,
     snark: 'Has opinions on scheduling policies',
-    tooltip: 'Relationship status with the Linux kernel: it\'s complicated. Knows where the bodies are buried (hint: /proc/sys/vm).'
+    tooltip: 'Relationship status with the Linux kernel: it\'s complicated. Knows where the bodies are buried (hint: /proc/sys/vm). Has debugged issues that required reading kernel source code at midnight. Voluntarily.'
   },
   {
-    name: 'CUDA & GPU Pipelines',
-    level: 85,
-    snark: 'Makes GPUs do non-gaming things',
-    tooltip: 'Optimizes workloads that cost more per hour than most people\'s rent. No pressure.'
+    name: 'OpenCL',
+    level: 84,
+    snark: 'GPU compute, the hard way',
+    tooltip: 'Used OpenCL for ARM-based algorithm optimization at Samsung before CUDA was everywhere. Not bitter. (A little bitter.)'
   },
   {
     name: 'Memory Management',
     level: 96,
-    snark: 'malloc() has trust issues',
-    tooltip: 'Can describe 14 different memory allocation strategies and when each one will destroy you. Has seen production go down over a 4-byte alignment.'
+    snark: 'malloc() has trust issues with others',
+    tooltip: 'Can describe 14 different memory allocation strategies and when each one will destroy you. Has seen production go down over a 4-byte alignment. Has fixed it before anyone noticed. Mostly.'
   },
   {
     name: 'Zero-Copy DMA Buffers',
     level: 88,
     snark: 'Allergic to unnecessary memcpy()',
-    tooltip: 'Eliminated host-device transfer overhead by integrating DMA buffers into a custom vLLM fork. This is the kind of thing that\'s impossible until it isn\'t.'
+    tooltip: 'Eliminated host-device transfer overhead by integrating DMA buffers into a custom vLLM fork. The kind of optimization that looks impossible on paper and takes 3 weeks to be right.'
   },
   {
     name: 'ARM Neoverse & NEON',
-    level: 89,
-    snark: 'Knows ARM better than most x86 folks',
-    tooltip: 'Worked on ARM systems before it was cool. Now it\'s cool and he has opinions about it. Many opinions.'
-  },
-  {
-    name: 'Distributed Inference',
-    level: 87,
-    snark: 'Multi-node, maximum suffering',
-    tooltip: 'Designing multi-node LLM serving systems. The hardest part isn\'t the network — it\'s explaining why the network is the hardest part.'
+    level: 91,
+    snark: 'More ARM knowledge than most ARM devs',
+    tooltip: 'Worked on ARM systems since before "ARM servers" was a sentence people said seriously. Now it\'s a sentence people say seriously. He has opinions. Many, many opinions. Ask him about NEON intrinsics — he\'ll either enlighten or traumatize you.'
   },
   {
     name: 'Lock-Free Concurrency',
     level: 91,
     snark: 'Mutex? We don\'t do that here',
-    tooltip: 'Writes lock-free data structures recreationally. Has the memory ordering scars to prove it. ABA problem? His nemesis. His recurring nightmare. His friend.'
+    tooltip: 'Writes lock-free data structures recreationally. Has the memory ordering scars to prove it. ABA problem? His nemesis. His recurring nightmare. His grudging respect.'
   },
   {
-    name: 'Perf Profiling',
+    name: 'perf / py-spy profiling',
     level: 98,
-    snark: 'Reads flamegraphs for fun',
-    tooltip: 'The flamegraph is not a problem indicator. The flamegraph is art. He has found a 17% throughput gain by staring at one long enough.'
+    snark: 'Reads flamegraphs for breakfast',
+    tooltip: 'Used perf and py-spy to analyze CPU utilization, cache thrashing, and wait states — and turned that analysis into a 17% throughput gain. The flamegraph is not a symptom. It is a map. He reads maps.'
   },
   {
-    name: 'Real-Time Systems (RTOS)',
-    level: 86,
+    name: 'Real-Time & Embedded (QNX)',
+    level: 88,
     snark: 'Microseconds matter. Always.',
-    tooltip: 'Spent years where "it was a few milliseconds late" was genuinely unacceptable. Your web app\'s 200ms API call physically pains him.'
+    tooltip: 'QNX firmware at Elisra, RTOS constraints at Samsung, ADAS real-time requirements at LeddarTech. "It was a few milliseconds late" is not a sentence he accepts. Your web app\'s 200ms API response physically pains him.'
   },
   {
     name: 'Python',
-    level: 78,
+    level: 82,
     snark: 'Uses it. Judges it. Still uses it.',
-    tooltip: 'Python is not a religion for him. It is a pragmatic tool that occasionally explodes the GIL in his face. He and Python have an understanding.'
+    tooltip: 'Python for ML pipelines, automation tooling, inference debugging, and a Jinja2-based automatic code generator that nobody asked for but everyone benefited from. He and the GIL have an understanding: he ignores it, and it causes problems.'
+  },
+  {
+    name: 'Docker & Build Systems',
+    level: 80,
+    snark: '"Works on all machines" (eventually)',
+    tooltip: 'Designed cross-distribution Linux Docker build systems at Zixi. The journey from "works on my machine" to "works everywhere" is humbling, iterative, and fully automatable.'
+  },
+  {
+    name: 'Android Camera HAL',
+    level: 79,
+    snark: 'Has abstracted more hardware than he admits',
+    tooltip: 'Implemented Hardware Abstraction Layers for image processing accelerators at Samsung, plus Android camera HAL integration. HAL: the polite fiction that hardware differences don\'t matter. They do. He hid them elegantly.'
   }
 ];
 
@@ -1036,24 +1098,28 @@ const jobs = [
   {
     id: 'job-neureality',
     company: 'NEUREALITY',
-    role: 'Senior Software Engineer — LLM Infrastructure Lead',
+    role: 'Senior Runtime Software Engineer — LLM Infrastructure',
     date: 'Feb 2025 – Present',
     facts: [
       {
-        official: 'Lead architect for high-performance LLM inference on ARM Neoverse servers accelerated by Qualcomm AI100.',
-        snark: 'Chief Priest of the Church of Making Fewer Cores Do More Work.'
+        official: 'Senior runtime software engineer for high-performance LLM inference on Qualcomm AI100 accelerators and ARM Neoverse servers.',
+        snark: 'Chief Priest of the Church of Making Fewer Cores Do More Work, with a Qualcomm accelerator as the altar.'
       },
       {
-        official: 'Engineered a serving stack where an 8-core ARM Neoverse N1 outperformed a 128-core Intel x86 under concurrent OpenAI-compatible workloads.',
-        snark: 'Technically made Intel look bad with one-sixteenth of the cores. Did not send them a card.'
+        official: 'Designed and implemented DMA-based buffer integration for Qualcomm AI100 into an internal vLLM fork, reducing host-device transfer overhead and latency.',
+        snark: '"Reducing overhead" is engineer for "I stared at memory maps until they confessed their sins."'
       },
       {
-        official: 'Designed and implemented zero-copy DMA buffer integration into a custom vLLM fork, eliminating host-device transfer overhead.',
-        snark: '"Eliminating overhead" is engineer for "I stared at memory maps until they confessed."'
+        official: 'Used perf and py-spy to analyze CPU utilization, cache thrashing, and wait states — delivering a 17% throughput gain per OpenAI server instance.',
+        snark: '17% might sound modest to you. To an infra manager, it is the sound of angels singing.'
       },
       {
-        official: 'Conducted deep system profiling and unlocked 17% throughput gain per server instance.',
-        snark: '17% might sound modest. It is not modest. It is the kind of number that makes infra managers cry tears of joy.'
+        official: 'Enabled an 8-core ARM Neoverse N1 server to outperform a 128-core Intel x86 server for 1–3 concurrent instances.',
+        snark: 'Technically made Intel look bad with 6.25% of the cores. Did not send them a sympathy card. Did not need to.'
+      },
+      {
+        official: 'Led system-wide performance investigations; selected a more efficient tokenizer and removed preprocessing bottlenecks in the serving path.',
+        snark: 'The tokenizer was the bottleneck. Nobody suspected the tokenizer. He suspected the tokenizer.'
       }
     ]
   },
@@ -1064,32 +1130,40 @@ const jobs = [
     date: 'Oct 2021 – Feb 2025',
     facts: [
       {
-        official: 'Developed C++ and Python frameworks for real-time ML inference in automotive (ADAS) environments.',
-        snark: 'Wrote software that runs in cars. A car. Going at speed. Near humans. No big deal.'
+        official: 'Developed and optimized ML inference workflows in C++ and Python for real-time ADAS automotive systems.',
+        snark: 'Wrote software that runs in cars. Cars. Moving. Near humans. On public roads. He is fine. You are fine.'
       },
       {
-        official: 'Performed GPU workload optimization and system-level profiling in resource-constrained environments.',
-        snark: '"Resource-constrained" is a polite way of saying "the GPU had the RAM of a 2009 netbook and still had to run a neural network."'
+        official: 'Worked extensively with TensorRT — engine serialization, runtime optimization, and debugging inference discrepancies between Python and C++ pipelines.',
+        snark: 'Debugging Python vs C++ TensorRT discrepancy is the engineering equivalent of "yes, they said the same thing, but differently." It is always a precision issue. Always.'
+      },
+      {
+        official: 'Utilized profiling tools to identify bottlenecks and optimize GPU workloads in resource-constrained environments.',
+        snark: '"Resource-constrained" is polite for "the embedded GPU had less memory than your watch and still needed to run a neural net in real time."'
       },
       {
         official: 'Delivered production-grade Linux and OpenCV-based infrastructure components.',
-        snark: 'Did you know OpenCV has 4,000 functions and 3,990 of them are underdocumented? He knows.'
+        snark: 'OpenCV has 4,000 functions. 3,990 are underdocumented. He has met most of them personally. It was not always pleasant.'
       }
     ]
   },
   {
     id: 'job-zixi',
-    company: 'ZIXI',
+    company: 'ZIXI — Software-Defined Video Platform',
     role: 'SDK Team Lead — Video Streaming Infrastructure',
     date: 'Jan 2021 – Sep 2021',
     facts: [
       {
-        official: 'Led SDK release cycle and partner integrations.',
-        snark: 'Translation: managed the part where your code has to work on someone else\'s machine. It didn\'t. Then it did.'
+        official: 'Managed the release of Zixi SDK and led partner integrations across various platforms.',
+        snark: 'Managed the part where your SDK has to work on someone else\'s machine, in someone else\'s environment, with someone else\'s compiler flags. It didn\'t. Then it did.'
       },
       {
-        official: 'Designed Docker-based cross-distribution Linux build systems.',
-        snark: '"Works on my machine" → builds Docker image → "Works on all machines." Revolutionary. Yes, he wants a medal.'
+        official: 'Designed and implemented Docker build systems ensuring seamless compatibility across Linux distributions.',
+        snark: '"Works on my machine" ➜ Docker image ➜ "Works everywhere." He invented a container. Not really. But it felt like it.'
+      },
+      {
+        official: 'Optimized core C++ components, enhancing performance and reducing deployment overhead.',
+        snark: 'Core C++ components had... let\'s call them "growth opportunities." He addressed them. With extreme prejudice.'
       }
     ]
   },
@@ -1100,32 +1174,56 @@ const jobs = [
     date: 'Jun 2019 – Mar 2020',
     facts: [
       {
-        official: 'Designed scalable cross-platform security infrastructure using C++14 and Boost.',
-        snark: 'Boost: for when you want 47 template error messages instead of 1. He speaks fluent Boost.'
+        official: 'Developed cross-platform infrastructure features for enterprise-grade endpoint security.',
+        snark: 'Wrote security software that runs silently in the background on millions of machines. Like a tiny, invisible, very well-optimized poltergeist.'
       },
       {
-        official: 'Achieved significant reductions in CPU and memory usage for endpoint security agents.',
-        snark: 'Made the security agent that runs on your laptop stop hogging 30% CPU like it owns the place.'
+        official: 'Designed scalable solutions with C++14 and Boost, achieving substantial CPU and memory performance improvements.',
+        snark: 'Boost: for when standard C++ isn\'t complex enough to express your contempt for simplicity. He is fluent. He has the template error message PTSD to prove it.'
+      },
+      {
+        official: 'Automated infrastructure processes with Python, streamlining deployment workflows.',
+        snark: 'Python automation: turning 40-step manual processes into 1 script that future engineers will fear to modify. Legacy, they call it. He calls it efficient.'
       }
     ]
   },
   {
     id: 'job-samsung',
-    company: 'SAMSUNG ISRAEL R&D (SIRC)',
+    company: 'SAMSUNG ISRAEL R&D CENTER (SIRC)',
     role: 'Software Engineer — Embedded Android & Hardware Acceleration',
     date: 'Aug 2015 – May 2019',
     facts: [
       {
-        official: 'Designed multi-threaded C++ systems for embedded platforms.',
-        snark: 'Multi-threading: the art of making two bugs run simultaneously at twice the speed.'
+        official: 'Designed and implemented real-time, multi-threaded C++ systems for embedded platforms.',
+        snark: 'Multi-threading: the noble art of making two race conditions run in parallel and somehow still shipping.'
       },
       {
-        official: 'Optimized ARM-based algorithms using NEON and OpenCL.',
-        snark: 'NEON intrinsics: the dark arts of extracting performance by rearranging data 128 bits at a time, hoping no one asks you to explain it.'
+        official: 'Algorithm optimization (Software IP) on ARM platforms using NEON and OpenCL.',
+        snark: 'NEON intrinsics: rearranging bytes 128 bits at a time while hoping management never asks to explain it on a whiteboard.'
       },
       {
-        official: 'Implemented Hardware Abstraction Layers (HAL) for image processing accelerators.',
-        snark: 'HAL: the polite fiction that hardware differences don\'t matter. They do. He hid them anyway.'
+        official: 'Designed automatic code generation scripts in Python using Jinja2.',
+        snark: 'Nobody asked for a Jinja2 code generator. He built one anyway. It was perfect. It is still running. You\'re welcome.'
+      },
+      {
+        official: 'Implemented Hardware Abstraction Layer for image processing hardware and Android camera HAL integration.',
+        snark: 'HAL: the polite engineering fiction that says hardware differences don\'t matter. They absolutely matter. He abstracted them into irrelevance.'
+      }
+    ]
+  },
+  {
+    id: 'job-elisra',
+    company: 'ELISRA',
+    role: 'Software Engineer — Firmware & Systems',
+    date: 'May 2011 – Aug 2013',
+    facts: [
+      {
+        official: 'C and C++ firmware development alongside C# infrastructure components.',
+        snark: 'Three languages, one job. C for performance, C++ for structure, C# for the parts where someone said "just make it work."'
+      },
+      {
+        official: 'QNX OS integration and full system tests.',
+        snark: 'QNX: the real-time OS that made Windows look like amateur hour. He was integrating it before it was a niche flex.'
       }
     ]
   }
@@ -1245,6 +1343,17 @@ document.addEventListener('keydown', e => {
 document.getElementById('konami-close').addEventListener('click', () => {
   document.getElementById('konami-overlay').classList.remove('show');
   showToastMsg('You are now legally obligated to send a calendar invite.');
+});
+
+// ─────────────────────────────────────────────
+//  TAGLINE REVEAL
+// ─────────────────────────────────────────────
+document.getElementById('hero-tagline').addEventListener('click', function() {
+  const reveal = document.getElementById('tagline-reveal');
+  reveal.style.display = reveal.style.display === 'none' ? 'inline' : 'none';
+  if (reveal.style.display !== 'none') {
+    showToastMsg('Of course he found it. He always finds it.');
+  }
 });
 
 // ─────────────────────────────────────────────
